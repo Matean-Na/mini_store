@@ -1,0 +1,23 @@
+{% extends 'mainapp/base.html' %}
+{% block title %}профиль{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+    <div style="height:130px" class="card p-4">
+        <div class=" image d-flex flex-column justify-content-center align-items-center"> <span id="login" class="name mt-3">{{ user }}</span> <span id="email" class="idd">{{ user.email }}</span>
+            <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span id="first_name" class="idd1">{{ user.first_name }} ||</span> <span id="last_name"><i class="fa fa-copy"></i>{{ user.last_name }}</span> </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="notify">
+    <form name="my" id="PostCreateForm" action="" method="POST">
+        {% csrf_token %}
+        {{ user_form|crispy }}
+        <button style="margin-top:15px;" type="submit" name="contact-submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+{% endblock %}

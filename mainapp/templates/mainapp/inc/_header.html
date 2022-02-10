@@ -1,0 +1,35 @@
+{% load mainapp_tag %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a style="margin-left: 50px;" class="navbar-brand" href="{% url 'product_list' %}">Главная</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Категории
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% get_category as category %}
+            {% for item in category %}
+            <li><a class="dropdown-item" href="/{{ item.url }}">{{ item.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+      <div class="d-flex">
+        {% if not request.user.is_authenticated %}
+        <a href="{% url 'login' %}"><button style="margin-right: 23px;" type="button" class="btn btn-primary">Авторизация</button></a>
+        <a href="{% url 'registration' %}"><button type="button" class="btn btn-secondary">Регистрация</button></a>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'profile' %}"><button style="margin-right: 23px;" type="button" class="btn btn-primary">{{ request.user.username }}</button></a>
+        <a href="{% url 'logout' %}"><button type="button" class="btn btn-secondary">выйти</button></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+  {% include 'mainapp/inc/messages.html' %}

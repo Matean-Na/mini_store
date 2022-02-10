@@ -1,0 +1,32 @@
+{% extends 'mainapp/base.html' %}
+{% block title %}Список товаров{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div id="content" class="my-5">
+        <div id="products">
+            <div class="row mx-0">
+                {% for product in products %}
+                <div class="col-lg-4 col-md-6 pt-md-0 pt-3">
+                    <div class="card d-flex flex-column align-items-center">
+                        <div class="product-name">{{ product.name }}</div>
+                        <div class="card-img"> <img src="{{ product.image.url  }}" alt="" height="100" id="shirt"> </div>
+                        <div class="text-muted text-center mt-auto">категория: {{ product.category }}</div>
+                        <div class="d-flex align-items-center justify-content-center colors my-2">
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="text-muted text-center mt-auto">{{ product.descriptions }}</div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center colors my-2">
+                            <a href="{{ product.get_absolute_url }}"><button style="font-size:12px;" type="button" class="btn btn-success">открыть</button></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
